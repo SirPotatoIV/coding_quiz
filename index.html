@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
-    <script defer src="script.js"></script>
-
+    
 
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container" id="questionsblock">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">
@@ -27,17 +26,13 @@
         </div>
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start Quiz</button>
-            <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
 
     </div>
-    <div class="container" class="hide">
-        <div id="userInput-container">
-
-                <div class="submitBtn hide">
-                    <button id="submit-btn" class="submit-btn btn">Submit</button>
-                </div>
-        </div>
+    <div class="container hide"  id="formname">
+        <input id="initials"></input> 
+        <br>
+        <button id="submit-btn" class="submit-btn btn">Submit</button>
     </div>
 
 
@@ -50,6 +45,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
 
 </body>
 

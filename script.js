@@ -1,15 +1,19 @@
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
+const submitButton = document.getElementById('submit-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
+const quesBlockElement = document.getElementById('questionsblock')
 const answerButtonsElement = document.getElementById('answer-buttons')
 let shuffledQuestions, currentQuestionIndex
 
+let counterTime = 60
+
 startButton.addEventListener('click', startGame)
-nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion()
-})
+//nextButton.addEventListener('click', () => {
+//    currentQuestionIndex++
+//   setNextQuestion()
+//})
 
 function startGame() {
     console.log('Started')
@@ -17,6 +21,7 @@ function startGame() {
     shuffledQuestions = questions.sort(() => Math.random() -.5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
+    //start the time
     setNextQuestion()
 
 }
@@ -36,6 +41,10 @@ function showQuestion(question) {
         if (answer.correct) {
             button.dataset.correct = answer
         }
+        else{
+            counterTime= counterTime - 15
+        }
+        
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
@@ -44,7 +53,7 @@ function showQuestion(question) {
 
 function resetState() {
     clearStatusClass(document.body)
-    nextButton.classList.add('hide')
+    //nextButton.classList.add('hide')
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
@@ -61,18 +70,43 @@ function selectAnswer(e) {
         const key = button.dataset.correct
     }
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hide')
+        //nextButton.classList.remove('hide')
+        currentQuestionIndex++
+        setNextQuestion()
+
     }else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+        // you nee to hide all and unhide the form (inititals and the submit to save local storage)
+       quesBlockElement.classList.add('hide')
+        // read from local storag JSON.parse
+        // onclick for the button
+        submitButton.addEventListener('click', inputStore())
+       //grab the input for the initials
+       function inputStore() {
+           localStorage.setItem('user',JSON.stringify(initials))
+       }
+       // you read the localstorage varibale rank  (parse)
+       var user = JSON.parse(localStorage.getItem('user'))
+       // if empyt start rank =[]
+       //stop the timer  (clearInterval)
+
+        newUsser={
+           initials: $("inputname").val(),
+           score:  counterTime
+        }
+
+        //push inside rank and then samve local storage JSON.stringify
+        // [{initicals:IA,score:45},{initals:HI, score:50}]
+       }
+      
+        // startButton.innerText = 'Restart'
+       // startButton.classList.remove('hide')
     }
-}
+
 
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
         element.classList.add('correct')
-        localStorage.setItem("correct_Answers", "1")
 
     } else {
         element.classList.add('wrong')
